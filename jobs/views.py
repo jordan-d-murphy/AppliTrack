@@ -1,15 +1,26 @@
-from django.shortcuts import get_object_or_404, render
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render
 
 from .models import Job, FollowUp
 
-# Create your views here.
-def index(request):
-    latest_jobs_list = Job.objects.order_by("-applied_date")[:5]
-    context = {
-        "latest_jobs_list": latest_jobs_list,
-    }
-    return render(request, "jobs/index.html", context)
+class JobListView(ListView):
+    model = Job
+    ordering = ['-applied_date']
 
-def detail(request, job_id):
-    job = get_object_or_404(Job, pk=job_id)
-    return render(request, "jobs/detail.html", {"job": job})
+class JobDetailView(DetailView):
+    model = Job
+
+class JobCreateView(CreateView):
+    model = Job
+    fields = '__all__'
+
+
+class JobUpdateView(UpdateView):
+    model = Job
+    fields = '__all__'
+
+
+class JobDeleteView(DeleteView):
+    model = Job
+    success_url = '/jobs'
+

@@ -1,6 +1,0 @@
-<h1>{{ job.company }}</h1>
-<ul>
-{% for follow_up in job.follow_up_set.all %}
-    <li>{{ follow_up.name }} | {{ follow_up.description }}</li>
-{% endfor %}
-</ul>
