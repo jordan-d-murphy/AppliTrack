@@ -1,0 +1,26 @@
+{% extends "jobs/base.html" %}
+{% block content %}
+
+<h1>Job Details</h1>
+
+<div class="mt-3">            
+    <a href="{% url 'jobs:follow_ups_list' %}" class="btn btn-outline-primary">Back to All Follow Ups</a>
+</div>
+
+<div class="card mt-3" style="width: 75%;">
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{ followup.job }}</h6>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{ followup.name }}</h6>
+        <p class="card-text">{{ followup.description }}</p>
+        <p class="card-text">{{ followup.notes }}</p>
+        <p class="card-text">{{ followup.created_date }}</p>
+        <p class="card-text">{{ followup.due_date }}</p>
+        <p class="card-text">{{ followup.resolved }}</p>
+        <a href="#" class="card-link">{{ followup.url }}</a>
+
+        <a href="{% url 'jobs:follow_ups_update' followup.id %}" class="card-link">Edit</a>
+        <a href="{% url 'jobs:follow_ups_delete' followup.id %}" class="card-link">Delete</a>
+        
+    </div>
+</div>
+{% endblock content %}   

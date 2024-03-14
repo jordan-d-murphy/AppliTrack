@@ -23,8 +23,11 @@
               <a class="nav-link" href="{% url 'jobs:job_create' %}">Add Job</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'jobs:job_create' %}">Add Follow Up</a>
-              </li>
+              <a class="nav-link" href="{% url 'jobs:follow_ups_list' %}">All Follow Ups</a>
+          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'jobs:follow_ups_create' %}">Add Follow Up</a>
+            </li>
           </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

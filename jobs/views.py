@@ -14,13 +14,32 @@ class JobCreateView(CreateView):
     model = Job
     fields = '__all__'
 
-
 class JobUpdateView(UpdateView):
     model = Job
     fields = '__all__'
 
-
 class JobDeleteView(DeleteView):
     model = Job
     success_url = '/jobs'
+
+
+
+class FollowUpListView(ListView):
+    model = FollowUp
+    ordering = ['-created_date']
+
+class FollowUpDetailView(DetailView):
+    model = FollowUp
+
+class FollowUpCreateView(CreateView):
+    model = FollowUp
+    fields = '__all__'
+
+class FollowUpUpdateView(UpdateView):
+    model = FollowUp
+    fields = '__all__'
+
+class FollowUpDeleteView(DeleteView):
+    model = FollowUp
+    success_url = '/jobs/follow_ups'
 

@@ -1,0 +1,31 @@
+{% extends "jobs/base.html" %}
+{% block content %}
+
+<h1>AppliTrack | Follow Ups</h1>
+<p class="fs-5">Track your job search by adding jobs that you've applied to.</p>
+<p class="fs-5">Favorite jobs that respond, and add follow up items to stay organized and productive.</p>
+
+<div class="m-3">            
+    <a href="https://getbootstrap.com" class="btn btn-outline-primary">Unresolved</a>
+    <a href="https://getbootstrap.com" class="btn btn-outline-primary">Show All</a>
+    <a href="{% url 'jobs:follow_ups_create' %}" class="btn btn-outline-primary">Add Follow Up</a>
+</div>
+
+    {% for followup in followup_list %}
+        <div class="card mt-3" style="width: 75%;">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{ followup.job }}</h6>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{ followup.name }}</h6>
+                <p class="card-text">{{ followup.description }}</p>
+                <p class="card-text">{{ followup.notes }}</p>
+                <p class="card-text">{{ followup.created_date }}</p>
+                <p class="card-text">{{ followup.due_date }}</p>
+                <p class="card-text">{{ followup.resolved }}</p>
+                <a href="{% url 'jobs:follow_ups_detail' followup.id %}" class="card-link">Details</a>
+                <a href="#" class="card-link">{{ followup.url }}</a>
+            </div>
+        </div>
+    {% endfor %} 
+{% endblock content %}   
+
+

@@ -29,7 +29,7 @@ class FollowUp(models.Model):
     notes = models.CharField(max_length=200, blank=True)
     url = models.CharField(max_length=500, blank=True)
     created_date = models.DateTimeField("date added", default=datetime.datetime.now())
-    due_date = models.DateTimeField("due date", blank=True)
+    due_date = models.DateTimeField("due date", blank=True, null=True)
     resolved = models.BooleanField()
 
     def __str__(self):
@@ -39,5 +39,4 @@ class FollowUp(models.Model):
         return self.due_date <= timezone.now() + datetime.timedelta(days=3)
     
     def get_absolute_url(self):
-      return reverse("follow_up_detail", kwargs={"pk": self.pk})
-
+      return reverse("jobs:follow_ups_detail", kwargs={"pk": self.pk})
