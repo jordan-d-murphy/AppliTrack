@@ -7,6 +7,10 @@ from .models import Job, FollowUp
 class JobListView(ListView):
     model = Job
     ordering = ['-applied_date']
+
+    def get_queryset(self):
+        # http://127.0.0.1:8000/jobs/?search=DoorDash
+        return Job.objects.filter(company=self.request.GET.get('search'))
     
 class FavoriteJobListView(ListView):
     model = Job
@@ -14,7 +18,7 @@ class FavoriteJobListView(ListView):
 
     def get_queryset(self):
         return Job.objects.filter(favorite=True)
-
+    
 class JobDetailView(DetailView):
     model = Job
 

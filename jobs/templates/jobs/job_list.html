@@ -1,6 +1,5 @@
 {% extends "jobs/base.html" %}
 {% block content %}
-
 <div class="row">
     <div class="col-md-10">
         <h1>AppliTrack | Jobs</h1>
@@ -13,37 +12,43 @@
         <p>{{ job_list.count }} jobs with followups.</p>
     </div>
 </div>
-
-
-<div class="m-3">            
+<div class="my-3">            
     <a href="{% url 'jobs:favorites_list' %}" class="btn btn-outline-primary">Favorites</a>
     <a href="{% url 'jobs:job_list' %}" class="btn btn-outline-primary">Show All</a>
-    <a href="https://getbootstrap.com" class="btn btn-outline-primary">Expand</a>
-    <a href="https://getbootstrap.com" class="btn btn-outline-primary">Collapse</a>
     <a href="{% url 'jobs:job_create' %}" class="btn btn-outline-primary">Add Job</a>
 </div>
-
     {% for job in job_list %}
         <div class="card mt-3" style="width: 75%;">
             <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-body-secondary">{{ job.company }}</h6>
-                <h4 class="card-title">{{ job.title }}</h4>
-                <p class="card-text">{{ job.description }}</p>
-                <p class="card-text">{{ job.notes }}</p>
-                <p class="card-text">{{ job.applied_date }}</p>
-                <p class="card-text">{{ job.favorite }}</p>
-
-                {% for followup in job.followup_set.all %}
-                <div class="card mt-3" style="width: 75%;">
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ followup.name }}</h6>
-                        <p class="card-text">{{ followup.description }}</p>
+                <div class="row">
+                    <div class="col-md-11">
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ job.company }}</h6>
+                        <h4 class="card-title">{{ job.title }}</h4>
+                    </div>
+                    <div class="col-md-1">
+                        <a class="card-link float-right" data-bs-toggle="collapse" href="#{{ job.id }}_collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Toggle
+                        </a>                   
+                    </div>
+                </div>                                    
+                <div class="collapse" id="{{ job.id }}_collapse">
+                    <div class="card card-body">                    
+                            <p class="card-text">{{ job.description }}</p>
+                            <p class="card-text">{{ job.notes }}</p>
+                            <p class="card-text">{{ job.applied_date }}</p>
+                            <p class="card-text">{{ job.favorite }}</p>
+                            <a href="#" class="card-link">{{ job.url }}</a>
+                            <a href="{% url 'jobs:job_detail' job.id %}" class="card-link">Details</a>
+                            {% for followup in job.followup_set.all %}
+                                <div class="card mt-3" style="width: 75%;">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ followup.name }}</h6>
+                                        <p class="card-text">{{ followup.description }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}                                                 
                     </div>
                 </div>
-                {% endfor %} 
-
-                <a href="{% url 'jobs:job_detail' job.id %}" class="card-link">Details</a>
-                <a href="#" class="card-link">{{ job.url }}</a>
             </div>
         </div>
     {% endfor %} 
