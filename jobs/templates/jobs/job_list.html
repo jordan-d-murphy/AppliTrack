@@ -7,14 +7,14 @@
         <p class="fs-5">Favorite jobs that respond, and add follow up items to stay organized and productive.</p>
     </div>
     <div class="col-md-2">
-        <p>{{ job_list.count }} jobs applied to.</p>
-        <p>{{ job_list.count }} jobs favorited.</p>
-        <p>{{ job_list.count }} jobs with followups.</p>
+        <p>{{ job_list.count }} results</p>
     </div>
 </div>
+<div id="filters">
+    <a href="{% url 'jobs:job_list' %}?search=favorite" class="btn btn-outline-primary btn-sm">Favorites</a>
+    <a href="{% url 'jobs:job_list' %}" class="btn btn-outline-primary btn-sm">Show All</a>
+</div>
 <div class="my-3">            
-    <a href="{% url 'jobs:favorites_list' %}" class="btn btn-outline-primary">Favorites</a>
-    <a href="{% url 'jobs:job_list' %}" class="btn btn-outline-primary">Show All</a>
     <a href="{% url 'jobs:job_create' %}" class="btn btn-outline-primary">Add Job</a>
 </div>
     {% for job in job_list %}
@@ -52,6 +52,10 @@
             </div>
         </div>
     {% endfor %} 
+
+    <div id="fab">
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="javascript:backToTop();">Back to Top</button>
+    </div>
 {% endblock content %}   
 
 

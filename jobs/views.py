@@ -1,6 +1,4 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.shortcuts import render
-from django.shortcuts import get_object_or_404
 
 from .models import Job, FollowUp
 
@@ -10,14 +8,12 @@ class JobListView(ListView):
 
     def get_queryset(self):
         # http://127.0.0.1:8000/jobs/?search=DoorDash
-        return Job.objects.filter(company=self.request.GET.get('search'))
-    
-class FavoriteJobListView(ListView):
-    model = Job
-    ordering = ['-applied_date']
-
-    def get_queryset(self):
-        return Job.objects.filter(favorite=True)
+        query = self.request.GET.get('search')
+        if query is not None:
+            if query == "favorite":
+                return Job.objects.filter(favorite=True)
+            return Job.objects.filter(company__icontains=query).order_by('-applied_date')
+        return Job.objects.filter().order_by('-applied_date')
     
 class JobDetailView(DetailView):
     model = Job

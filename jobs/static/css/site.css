@@ -1,3 +1,20 @@
 a {
     text-decoration: none;
-  }
+}
+
+#fab {
+  position: fixed;
+  bottom: 30px;
+  right:30px;
+}
+
+#filters {
+  position: fixed;
+  top: 65px;
+  right: 30px;
+}
+
+#filters > a {
+  display: block;
+  margin-top: 25px;
+}
