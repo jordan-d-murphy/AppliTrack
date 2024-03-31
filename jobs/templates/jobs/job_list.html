@@ -13,17 +13,26 @@
 <div id="filters">
     <a href="{% url 'jobs:job_list' %}?search=favorite" class="btn btn-outline-primary btn-sm">Favorites</a>
     <a href="{% url 'jobs:job_list' %}" class="btn btn-outline-primary btn-sm">Show All</a>
+    <a href="{% url 'jobs:job_create' %}" class="btn btn-outline-primary btn-sm">Add Job</a>
 </div>
 <div class="my-3">            
-    <a href="{% url 'jobs:job_create' %}" class="btn btn-outline-primary">Add Job</a>
+    <a href="{% url 'jobs:job_create' %}" class="btn btn-outline-primary btn-sm">Add Job</a>
+    <a href="{% url 'jobs:job_list' %}" class="btn btn-outline-primary btn-sm mx-3">Show All</a>
 </div>
     {% for job in job_list %}
+    {% if job.recently_applied or job.favorite %}
+        <!-- <p>RECENT</p> -->
         <div class="card mt-3" style="width: 75%;">
+    {% else %}
+        <!-- <p>NOT RECENT</p> -->
+        <div class="card mt-3" style="width: 75%; opacity: .4;">
+    {% endif %}
+        
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-11">
                         <h6 class="card-subtitle mb-2 text-body-secondary">{{ job.company }}</h6>
-                        <h4 class="card-title">{{ job.title }}</h4>
+                        <h4 class="card-title">{{ job.title }}</h4>                    
                     </div>
                     <div class="col-md-1">
                         <a class="card-link float-right" data-bs-toggle="collapse" href="#{{ job.id }}_collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -35,7 +44,7 @@
                     <div class="card card-body">                    
                             <p class="card-text">{{ job.description }}</p>
                             <p class="card-text">{{ job.notes }}</p>
-                            <p class="card-text">{{ job.applied_date }}</p>
+                            <p class="card-text">{{ job.applied_date }}</p>                        
                             <p class="card-text">{{ job.favorite }}</p>
                             <a href="#" class="card-link">{{ job.url }}</a>
                             <a href="{% url 'jobs:job_detail' job.id %}" class="card-link">Details</a>
