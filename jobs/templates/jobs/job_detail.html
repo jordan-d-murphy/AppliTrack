@@ -15,6 +15,8 @@
         <p class="card-text">{{ job.notes }}</p>
         <p class="card-text">{{ job.applied_date }}</p>
         <p class="card-text">{{ job.favorite }}</p>
+        <p class="card-text">{{ job.multiple }}</p>
+        <p class="card-text">{{ job.multiple_count }}</p>
         <a href="#" class="card-link">{{ job.url }}</a>
 
         <a href="{% url 'jobs:job_update' job.id %}" class="card-link">Edit</a>

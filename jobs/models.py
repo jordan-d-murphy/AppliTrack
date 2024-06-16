@@ -12,6 +12,8 @@ class Job(models.Model):
     notes = models.CharField(max_length=200, blank=True)
     applied_date = models.DateTimeField("date applied", default=datetime.datetime.now())
     favorite = models.BooleanField()
+    multiple = models.BooleanField(default=False)
+    multiple_count = models.IntegerField(default=1)
 
     def __str__(self):
         return f"{self.title} @ {self.company}"
